@@ -109,8 +109,9 @@ const MovieSearchEngine = () => {
   // Função para buscar filmes
   const searchMovies = async () => {
     try {
-      const response = await axios.get(`http://www.omdbapi.com/?s=${query}&apikey=403abbfe`); // Faz uma requisição GET para a API OMDB
-      setMovies(response.data.Search); // Armazena os dados dos filmes no estado movies
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=61a7a03476afe45fe482e9c81ef5997f&query=${query}`); // Faz uma requisição GET para a API OMDB
+      setMovies(response.results); // Armazena os dados dos filmes no estado movies
+      console.log(response.results)
     } catch (error) {
       console.error("Error fetching movie data:", error); // Exibe um erro no console em caso de falha
     }
