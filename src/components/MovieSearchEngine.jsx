@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import { FaStar } from 'react-icons/fa'; // Importa o ícone de estrela
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -12,6 +13,7 @@ const Container = styled.div`
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   max-width: 800px;
+  max-height:80%;
   margin: 50px auto;
 `;
 
@@ -109,12 +111,24 @@ const MovieSearchEngine = () => {
   // Função para buscar filmes
   const searchMovies = async () => {
     try {
-      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=61a7a03476afe45fe482e9c81ef5997f&query=${query}`); // Faz uma requisição GET para a API OMDB
-      setMovies(response.results); // Armazena os dados dos filmes no estado movies
-      console.log(response.results)
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=61a7a03476afe45fe482e9c81ef5997f&query=${query}&language=pt-BR`); // Faz uma requisição GET para a API OMDB
+      setMovies(response.data.results); // Armazena os dados dos filmes no estado movies
+      console.log(response.data.results)
     } catch (error) {
       console.error("Error fetching movie data:", error); // Exibe um erro no console em caso de falha
     }
+  };
+
+  const renderStars = (rating) => {
+    const stars = [];
+    const starRating = Math.round(rating / 2); // Converte de 0-10 para 0-5
+
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <FaStar key={i} color={i <= starRating ? "#ffc107" : "#e4e5e9"} /> // Estrela preenchida se i <= starRating
+      );
+    }
+    return stars;
   };
 
   return (
@@ -129,10 +143,11 @@ const MovieSearchEngine = () => {
       <Button onClick={searchMovies}>Search</Button> {/* Botão que chama a função searchMovies quando clicado */}
       <MoviesContainer>
         {movies && movies.map((movie) => ( // Verifica se há filmes e os mapeia para exibir MovieCard
-          <MovieCard key={movie.imdbID}>
-            <img src={movie.Poster} alt={`${movie.Title} Poster`} /> {/* Exibe o pôster do filme */}
-            <h3>{movie.Title}</h3> {/* Exibe o título do filme */}
-            <p>{movie.Year}</p> {/* Exibe o ano do filme */}
+          <MovieCard key={movie.id}>
+            <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={`${movie.title} Poster`} /> {/* Exibe o pôster do filme */}
+            <h3>{movie.title}</h3> {/* Exibe o título do filme */}
+            <p>{movie.release_date.substring(0,4)}</p> {/* Exibe o ano do filme */}
+            <div>{renderStars(movie.vote_average)}</div>
           </MovieCard>
         ))}
       </MoviesContainer>
