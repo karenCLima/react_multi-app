@@ -22,7 +22,7 @@ import {
 } from "react-icons/fa";
 import QRCodeGenerator from "./components/QRCodeGenarator";
 import IPAddressFinder from "./components/IPAddressFinder";
-import MovieSearchEngine from "./components/MovieSearchEngine";
+import MovieSearchEngine from "./Pages/MovieSearchEngine";
 import TodoApp from "./components/TodoApp";
 import QuizApp from "./components/QuizApp";
 import LanguageTranslator from "./components/LanguageTranslator";
@@ -36,7 +36,7 @@ const AppContainer = styled.div`
   flex-direction: row;
   width: 100%;
   height: 100vh;
-  background-color: #f0f0f0;
+  background-color: var(--primary-color);
 `;
 
 // Estiliza o conteúdo principal do aplicativo.
@@ -57,10 +57,10 @@ const CarouselContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 80%;
-  height: 70%;
+  width: 65%;
+  height: 50%;
   margin: auto;
-  background-color: #2c3e50;
+  background-color: var(--terciary-color);
   border-radius: 20px;
   padding: 20px;
 `;
@@ -68,7 +68,7 @@ const CarouselContainer = styled.div`
 // Estiliza a barra de navegação.
 const NavBar = styled.div`
   width: 240px;
-  background-color: #2c3e50;
+  background-color: var(--quaternary-color);
   color: white;
   height: 100%;
   display: flex;
@@ -103,25 +103,25 @@ const NavBarToggle = styled.div`
 
 // Estiliza os links na barra de navegação.
 const StyledLink = styled(Link)`
-  color: white;
+  color: grey;
   text-decoration: none;
   padding: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: background-color 0.3s, color 0.3s;
 
   &:hover {
-    background-color: #34495e;
-    color: #ecf0f1;
+    background-color: var(--terciary-color);
+    border-radius:20px;
+    color:#fff;
   }
 `;
 
 // Estiliza o rodapé do aplicativo.
 const Footer = styled.div`
   width: 100%;
-  background-color: #2c3e50;
-  color: white;
+  background-color: var(--quaternary-color);
+  color: grey;
   text-align: center;
   padding: 10px 0;
   position: absolute;
@@ -139,7 +139,7 @@ const CarouselItem = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -156,13 +156,13 @@ const CarouselItem = styled.div`
   h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: white;
+    color: grey;
   }
 
   button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--quaternary-color);
+    color: grey;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -170,7 +170,8 @@ const CarouselItem = styled.div`
     font-size: 16px;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: var(--terciary-color);
+      color:white;
     }
   }
 `;
@@ -178,7 +179,7 @@ const CarouselItem = styled.div`
 // Estiliza o botão de retorno.
 const ReturnButton = styled.button`
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: var(--quaternary-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -189,7 +190,8 @@ const ReturnButton = styled.button`
   gap: 5px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--terciary-color);
+    color:white;
   }
 `;
 
@@ -306,9 +308,11 @@ const App = () => {
               onClick={handleLogout}
               style={{
                 marginTop: "20px",
-                color: "white",
-                backgroundColor: "transparent",
+                color: "grey",
+                backgroundColor: "#FAEDCE",
                 border: "none",
+                borderRadius: "20px",
+                boxShadow:"15px rgba(0,0,0,0.3)"
               }}
             >
               Logout
