@@ -22,7 +22,7 @@ import {
 } from "react-icons/fa";
 import QRCodeGenerator from "./components/QRCodeGenarator";
 import IPAddressFinder from "./components/IPAddressFinder";
-import MovieSearchEngine from "./components/MovieSearchEngine";
+import MovieSearchEngine from "./Pages/MovieSearchEngine";
 import TodoApp from "./components/TodoApp";
 import QuizApp from "./components/QuizApp";
 import LanguageTranslator from "./components/LanguageTranslator";
@@ -179,7 +179,7 @@ const CarouselItem = styled.div`
 // Estiliza o botão de retorno.
 const ReturnButton = styled.button`
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: var(--quaternary-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -190,7 +190,8 @@ const ReturnButton = styled.button`
   gap: 5px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--terciary-color);
+    color:white;
   }
 `;
 
