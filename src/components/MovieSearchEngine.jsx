@@ -8,18 +8,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
-  background: #fff;
+  padding: 30px;
+  background: var(--terciary-color);
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  max-width: 800px;
+  max-width: 1000px;
   max-height:80%;
   margin: 50px auto;
 `;
 
 // Define o estilo do título
 const Title = styled.h2`
-  color: #333;
+  color: grey;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -37,7 +37,7 @@ const Input = styled.input`
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: #007bff;
+    border-color: var(--terciary-color);
     outline: none;
   }
 `;
@@ -45,16 +45,16 @@ const Input = styled.input`
 // Define o estilo do botão
 const Button = styled.button`
   padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--secondary-color);
+  color: grey;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color);
   }
 `;
 
@@ -71,7 +71,7 @@ const MoviesContainer = styled.div`
 
 // Define o estilo do cartão de filme
 const MovieCard = styled.div`
-  background: #f9f9f9;
+  background: var(--primary-color);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 10px;
@@ -87,7 +87,7 @@ const MovieCard = styled.div`
 
   img {
     border-radius: 10px;
-    max-width: 100%; /* Ajusta o tamanho da imagem para caber dentro do cartão */
+    max-width: 90%; /* Ajusta o tamanho da imagem para caber dentro do cartão */
     height: auto;
     margin-bottom: 10px;
   }
@@ -95,6 +95,7 @@ const MovieCard = styled.div`
   h3 {
     font-size: 18px;
     margin: 10px 0;
+    color:grey;
   }
 
   p {

@@ -1,3 +1,10 @@
+:root{
+  --primary-color:#FEFAE0;
+  --secondary-color: #FAEDCE;
+  --terciary-color:#E0E5B6;
+  --quaternary-color:#CCD5AE;
+}
+
 body {
   margin: 0;
   padding: 0;
