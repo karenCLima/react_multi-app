@@ -9,16 +9,16 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background: #fff;
+  background: var(--terciary-color);
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  margin: 50px auto;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
 // Define o estilo do título
 const Title = styled.h2`
-  color: #333;
+  color: grey;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -36,14 +36,23 @@ const Select = styled.select`
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 16px;
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: #007bff;
+    border-color: var(--terciary-color);
     outline: none;
   }
+
+  option:hover{
+    border-radius: 20px;
+    background-color: var(--terciary-color);
+    cursor: pointer;
+    color:grey;
+  }
+
+
 `;
 
 // Define o estilo do campo de entrada
@@ -51,14 +60,14 @@ const Input = styled.input`
   margin-bottom: 20px;
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   width: 100%;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: #007bff;
+    border-color: var(--terciary-color);
     outline: none;
   }
 `;
@@ -66,17 +75,17 @@ const Input = styled.input`
 // Define o estilo do botão
 const Button = styled.button`
   padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--secondary-color);
+  color: grey;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
   margin-bottom: 20px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color);
   }
 `;
 
@@ -93,11 +102,11 @@ const TranslatedText = styled.p`
 `;
 
 // Componente principal LanguageTranslator
-const LanguageTranslator = () => {
-  const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
-  const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
-  const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
-  const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
+const LanguageTranslatorComponent = ()=>{
+    const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
+    const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
+    const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
+    const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
 
   // Função para traduzir o texto
   const translateText = async () => {
@@ -149,6 +158,6 @@ const LanguageTranslator = () => {
       {translatedText && <TranslatedText>{translatedText}</TranslatedText>} {/* Condicional que exibe o texto traduzido se translatedText não for vazio */}
     </Container>
   );
-};
+}
 
-export default LanguageTranslator; // Exporta o componente LanguageTranslator como padrão
+export default LanguageTranslatorComponent
