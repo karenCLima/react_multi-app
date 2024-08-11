@@ -1,5 +1,5 @@
 
-import MovieComponent from '../components/MovieSearchEngineComponents/MovieComponent';
+import MovieComponent from '../components/MovieSearchComponents/MovieComponent';
 
 
 // Componente principal MovieSearchEngine
