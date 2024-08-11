@@ -1,5 +1,5 @@
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
-import IPAddressFinderComponent from '../components/IPAddressFinderComponents/IPAddressFinderComponent';
+import IPAddressFinderComponent from '../components/IPAddressComponents/IPAddressFinderComponent';
 
 // Define o estilo do container principal
 const Container = styled.div`
