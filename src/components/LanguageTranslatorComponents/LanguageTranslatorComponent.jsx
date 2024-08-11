@@ -1,6 +1,8 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import Select from 'react-select'; //Importa o react-select para estilizar o Select
+import SelectLanguage from './SelectLanguage';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -9,16 +11,16 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 40px;
-  background: #fff;
+  background: var(--terciary-color);
   border-radius: 15px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  margin: 50px auto;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
 // Define o estilo do título
 const Title = styled.h2`
-  color: #333;
+  color: grey;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -32,18 +34,16 @@ const Label = styled.label`
 `;
 
 // Define o estilo do select
-const Select = styled.select`
+const SelectContainer = styled.div`
   margin-bottom: 20px;
+  display:flex;
+  flex-direction: row;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 16px;
   transition: border-color 0.3s;
 
-  &:focus {
-    border-color: #007bff;
-    outline: none;
-  }
+
 `;
 
 // Define o estilo do campo de entrada
@@ -51,14 +51,14 @@ const Input = styled.input`
   margin-bottom: 20px;
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
   width: 100%;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: #007bff;
+    border-color: var(--terciary-color);
     outline: none;
   }
 `;
@@ -66,17 +66,17 @@ const Input = styled.input`
 // Define o estilo do botão
 const Button = styled.button`
   padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--secondary-color);
+  color: grey;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
   margin-bottom: 20px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color);
   }
 `;
 
@@ -92,12 +92,49 @@ const TranslatedText = styled.p`
   text-align: center;
 `;
 
+//Cria as opções disponíveis para o select
+const options = [
+  { value: 'en', label: 'English' },
+  { value: 'es', label: 'Spanish' },
+  { value: 'fr', label: 'French' },
+  { value: 'de', label: 'German' },
+  { value: 'it', label: 'Italian' },
+  { value: 'pt', label: 'Portuguese' },
+];
+
+// Estilos customizados para o Select do react-select
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    borderRadius: '20px',
+    boxShadow: 'none',
+    '&:hover': {
+      borderColor: 'var(--terciary-color)',
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected
+      ? 'var(--primary-color)' // Cor de fundo da option selecionada
+      : state.isFocused
+      ? 'var(--terciary-color)' // Cor de fundo ao passar o mouse (hover)
+      : '#fff', // Cor de fundo padrão
+    color: state.isSelected ? 'grey' : 'black', // Cor do texto
+    padding: 10,
+    borderRadius: '20px'
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '20px',
+  }),
+};
+
 // Componente principal LanguageTranslator
-const LanguageTranslator = () => {
-  const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
-  const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
-  const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
-  const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
+const LanguageTranslatorComponent = ()=>{
+    const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
+    const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
+    const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
+    const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
 
   // Função para traduzir o texto
   const translateText = async () => {
@@ -111,6 +148,7 @@ const LanguageTranslator = () => {
       setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
     } catch (error) {
       console.error("Error translating text:", error); // Exibe um erro no console em caso de falha
+      alert("Sorry! Error translating text. Try again!")
     }
   };
 
@@ -118,26 +156,18 @@ const LanguageTranslator = () => {
     <Container>
       <Title>Language Translator</Title>
       <div>
-        <Label>Source Language:</Label>
-        <Select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-        </Select>
+        <SelectContainer>
+            <Label>Source Language:</Label>
+            <SelectLanguage language={sourceLang} setLanguage={setSourceLang} />
+        </SelectContainer>
+        
       </div>
       <div>
-        <Label>Target Language:</Label>
-        <Select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-        </Select>
+        <SelectContainer>
+            <Label>Target Language:</Label>
+            <SelectLanguage language={targetLang} setLanguage={setTargetLang}
+            />
+        </SelectContainer>
       </div>
       <Input
         type="text"
@@ -149,6 +179,6 @@ const LanguageTranslator = () => {
       {translatedText && <TranslatedText>{translatedText}</TranslatedText>} {/* Condicional que exibe o texto traduzido se translatedText não for vazio */}
     </Container>
   );
-};
+}
 
-export default LanguageTranslator; // Exporta o componente LanguageTranslator como padrão
+export default LanguageTranslatorComponent
