@@ -5,7 +5,7 @@ import IPAddressData from './IPAddressData';
 
 // Define o estilo do título
 const Title = styled.h2`
-  color: gr;
+  color: grey;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -15,15 +15,15 @@ const Title = styled.h2`
 const Input = styled.input`
   margin-bottom: 20px;
   padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid var(--terciary-color);
+  border-radius: 20px;
   width: 100%;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   transition: border-color 0.3s;
 
   &:focus {
-    border-color: #007bff;
+    border-color: var(--terciary-color);
     outline: none;
   }
 `;
@@ -31,16 +31,16 @@ const Input = styled.input`
 // Define o estilo do botão
 const Button = styled.button`
   padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--secondary-color);
+  color: grey;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color);
   }
 `;
 
