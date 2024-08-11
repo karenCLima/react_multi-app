@@ -80,6 +80,7 @@ const MovieComponent = () =>{
     const [movies, setMovies] = useState([]); // Define o estado para armazenar os filmes
     const [errors, setErrors] = useState({}); // Declara um estado errors para armazenar mensagens de erro
 
+    //Função que valida se existe erro
     const validate = ()=>{
         const newErrors = {}; //Objeto para armazenar novos erros
 
@@ -123,7 +124,7 @@ const MovieComponent = () =>{
             onChange={(e) => setQuery(e.target.value)} // Atualiza o estado query conforme o usuário digita
             placeholder="Search for a movie" // Placeholder do campo de entrada
         />
-        {/* Exibe a mensagem de erro se houver erro no campo 'name' */}
+        {/* Exibe a mensagem de erro se houver erro no campo 'query' */}
         {errors.query && <ErrorMessage>{errors.query}</ErrorMessage>}
         <Button onClick={searchMovies}>Search</Button> {/* Botão que chama a função searchMovies quando clicado */}
         <MoviesContainer>
