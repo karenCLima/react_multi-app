@@ -21,7 +21,7 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 import QRCodeGenerator from "./components/QRCodeGenarator";
-import IPAddressFinder from "./components/IPAddressFinder";
+import IPAddressFinder from "./pages/IPAddressFinder";
 import MovieSearchEngine from "./pages/MovieSearchEngine";
 import TodoApp from "./components/TodoApp";
 import QuizApp from "./components/QuizApp";
