@@ -84,7 +84,7 @@ const Button = styled.button`
 const TranslatedText = styled.p`
   color: #333;
   font-size: 18px;
-  background: #f9f9f9;
+  background: var(--primary-color);
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
