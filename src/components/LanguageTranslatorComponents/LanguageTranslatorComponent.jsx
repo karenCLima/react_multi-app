@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import Select from 'react-select'; //Importa o react-select para estilizar o Select
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -32,25 +33,14 @@ const Label = styled.label`
 `;
 
 // Define o estilo do select
-const Select = styled.select`
+const SelectContainer = styled.div`
   margin-bottom: 20px;
+  display:flex;
+  flex-direction: row;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 20px;
   font-size: 16px;
   transition: border-color 0.3s;
-
-  &:focus {
-    border-color: var(--terciary-color);
-    outline: none;
-  }
-
-  option:hover{
-    border-radius: 20px;
-    background-color: var(--terciary-color);
-    cursor: pointer;
-    color:grey;
-  }
 
 
 `;
@@ -101,6 +91,43 @@ const TranslatedText = styled.p`
   text-align: center;
 `;
 
+//Cria as opções disponíveis para o select
+const options = [
+  { value: 'en', label: 'English' },
+  { value: 'es', label: 'Spanish' },
+  { value: 'fr', label: 'French' },
+  { value: 'de', label: 'German' },
+  { value: 'it', label: 'Italian' },
+  { value: 'pt', label: 'Portuguese' },
+];
+
+// Estilos customizados para o Select do react-select
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    borderRadius: '20px',
+    boxShadow: 'none',
+    '&:hover': {
+      borderColor: 'var(--terciary-color)',
+    },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected
+      ? 'var(--primary-color)' // Cor de fundo da option selecionada
+      : state.isFocused
+      ? 'var(--terciary-color)' // Cor de fundo ao passar o mouse (hover)
+      : '#fff', // Cor de fundo padrão
+    color: state.isSelected ? 'grey' : 'black', // Cor do texto
+    padding: 10,
+    borderRadius: '20px'
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '20px',
+  }),
+};
+
 // Componente principal LanguageTranslator
 const LanguageTranslatorComponent = ()=>{
     const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
@@ -127,26 +154,27 @@ const LanguageTranslatorComponent = ()=>{
     <Container>
       <Title>Language Translator</Title>
       <div>
-        <Label>Source Language:</Label>
-        <Select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-        </Select>
+        <SelectContainer>
+            <Label>Source Language:</Label>
+            <Select
+            value={options.find((option) => option.value === sourceLang)}
+            onChange={(option) => setSourceLang(option.value)}
+            options={options}
+            styles={customStyles} // Aplicando os estilos customizados
+            />
+        </SelectContainer>
+        
       </div>
       <div>
-        <Label>Target Language:</Label>
-        <Select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-        </Select>
+        <SelectContainer>
+            <Label>Target Language:</Label>
+            <Select
+            value={options.find((option) => option.value === targetLang)}
+            onChange={(option) => setTargetLang(option.value)}
+            options={options}
+            styles={customStyles} // Aplicando os estilos customizados
+            />
+        </SelectContainer>
       </div>
       <Input
         type="text"
