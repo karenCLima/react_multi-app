@@ -2,6 +2,7 @@ import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import Select from 'react-select'; //Importa o react-select para estilizar o Select
+import SelectLanguage from './SelectLanguage';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -147,6 +148,7 @@ const LanguageTranslatorComponent = ()=>{
       setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
     } catch (error) {
       console.error("Error translating text:", error); // Exibe um erro no console em caso de falha
+      alert("Sorry! Error translating text. Try again!")
     }
   };
 
@@ -156,23 +158,14 @@ const LanguageTranslatorComponent = ()=>{
       <div>
         <SelectContainer>
             <Label>Source Language:</Label>
-            <Select
-            value={options.find((option) => option.value === sourceLang)}
-            onChange={(option) => setSourceLang(option.value)}
-            options={options}
-            styles={customStyles} // Aplicando os estilos customizados
-            />
+            <SelectLanguage language={sourceLang} setLanguage={setSourceLang} />
         </SelectContainer>
         
       </div>
       <div>
         <SelectContainer>
             <Label>Target Language:</Label>
-            <Select
-            value={options.find((option) => option.value === targetLang)}
-            onChange={(option) => setTargetLang(option.value)}
-            options={options}
-            styles={customStyles} // Aplicando os estilos customizados
+            <SelectLanguage language={targetLang} setLanguage={setTargetLang}
             />
         </SelectContainer>
       </div>
