@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center; // Alinha os itens no centro horizontalmente.
   justify-content: center; // Alinha os itens no centro verticalmente.
   padding: 40px; // Adiciona padding de 40px ao redor do conteúdo.
-  background: #fff; // Define o fundo como branco.
+  background: var(--terciary-color); // Define o fundo como branco.
   border-radius: 15px; // Adiciona bordas arredondadas de 15px.
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Adiciona uma sombra sutil ao redor do componente.
   max-width: 500px; // Define a largura máxima como 500px.

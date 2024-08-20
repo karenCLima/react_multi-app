@@ -1,7 +1,5 @@
 // Importa os hooks useState e useEffect da biblioteca React para gerenciar estado e efeitos colaterais.
 import { useState, useEffect } from 'react';
-// Importa a biblioteca axios para fazer requisições HTTP.
-import axios from 'axios';
 // Importa a biblioteca styled-components para criar componentes estilizados.
 import styled from 'styled-components';
 import { getTasks, addTask, deleteTask, updateTask } from '../../service/TaskService'
@@ -9,7 +7,7 @@ import { getTasks, addTask, deleteTask, updateTask } from '../../service/TaskSer
 // Cria um componente estilizado chamado Title usando styled-components.
 // Esse componente estiliza um <h2> com cor, margem, tamanho da fonte e alinhamento.
 const Title = styled.h2`
-  color: #333; // Define a cor do texto como um tom escuro de cinza.
+  color: grey; // Define a cor do texto como um tom escuro de cinza.
   margin-bottom: 20px; // Adiciona uma margem de 20px abaixo do título.
   font-size: 24px; // Define o tamanho da fonte como 24px.
   text-align: center; // Alinha o texto no centro horizontalmente.
@@ -20,7 +18,7 @@ const Title = styled.h2`
 const Input = styled.input`
   margin-bottom: 20px; // Adiciona uma margem de 20px abaixo do input.
   padding: 12px; // Adiciona padding de 12px dentro do input.
-  border: 1px solid #ccc; // Define uma borda de 1px sólida e cinza clara.
+  border: 1px solid var(--terciary-color); // Define uma borda de 1px sólida e cinza clara.
   border-radius: 5px; // Adiciona bordas arredondadas de 5px.
   width: 100%; // Define a largura como 100% do contêiner pai.
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); // Adiciona uma sombra interna sutil.
@@ -28,7 +26,7 @@ const Input = styled.input`
   transition: border-color 0.3s; // Adiciona uma transição suave para a cor da borda.
 
   &:focus { // Aplica estilos ao input quando ele está em foco.
-    border-color: #007bff; // Muda a cor da borda para azul quando o input está em foco.
+    border-color: var(--terciary-color); // Muda a cor da borda para azul quando o input está em foco.
     outline: none; // Remove o contorno padrão quando o input está em foco.
   }
 `;
@@ -37,8 +35,8 @@ const Input = styled.input`
 // Esse componente estiliza um <button> com padding, cor de fundo, cor do texto, bordas e efeitos de transição.
 const Button = styled.button`
   padding: 12px 20px; // Adiciona padding de 12px verticalmente e 20px horizontalmente.
-  background-color: #007bff; // Define a cor de fundo como azul.
-  color: white; // Define a cor do texto como branco.
+  background-color: var(--secondary-color); // Define a cor de fundo como azul.
+  color: grey; // Define a cor do texto como branco.
   border: none; // Remove a borda padrão do botão.
   border-radius: 5px; // Adiciona bordas arredondadas de 5px.
   cursor: pointer; // Define o cursor como uma mão ao passar sobre o botão.
@@ -47,7 +45,7 @@ const Button = styled.button`
   margin-bottom: 20px; // Adiciona uma margem de 20px abaixo do botão.
 
   &:hover { // Aplica estilos ao botão quando o cursor está sobre ele.
-    background-color: #0056b3; // Muda a cor de fundo para um tom mais escuro de azul.
+    background-color: var(--primary-color); // Muda a cor de fundo para um tom mais escuro de azul.
   }
 `;
 
@@ -62,7 +60,7 @@ const TaskList = styled.ul`
 // Cria um componente estilizado chamado TaskItem usando styled-components.
 // Esse componente estiliza um <li> com fundo, bordas arredondadas, padding, margem, sombra e efeitos de transição.
 const TaskItem = styled.li`
-  background: #f9f9f9; // Define o fundo como um tom muito claro de cinza.
+  background: var(--secondary-color); // Define o fundo como um tom muito claro de cinza.
   border-radius: 5px; // Adiciona bordas arredondadas de 5px.
   padding: 10px; // Adiciona padding de 10px dentro do item.
   margin-bottom: 10px; // Adiciona uma margem de 10px abaixo do item.
@@ -74,7 +72,7 @@ const TaskItem = styled.li`
   align-items: center; // Alinha os itens no centro verticalmente.
 
   &:hover { // Aplica estilos ao item quando o cursor está sobre ele.
-    background-color: #f1f1f1; // Muda a cor de fundo para um tom ligeiramente mais escuro de cinza.
+    background-color: var(--primary-color); // Muda a cor de fundo para um tom ligeiramente mais escuro de cinza.
   }
 
   button { // Estiliza os botões dentro do TaskItem.
