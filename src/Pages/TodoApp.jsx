@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 // Importa a biblioteca styled-components para criar componentes estilizados.
 import styled from 'styled-components';
+import {v4 as uuidv4} from 'uuid'
 
 // Define a URL da API que será usada para obter, adicionar, editar e excluir tarefas.
 const API_URL = 'http://localhost:5000/tasks';
@@ -129,7 +130,10 @@ const EditInput = styled.input`
 // Define o componente funcional TodoApp.
 const TodoApp = () => {
   // Usa o hook useState para criar variáveis de estado para a tarefa atual, lista de tarefas, tarefa em edição e texto da tarefa em edição.
-  const [task, setTask] = useState(''); // Estado para a nova tarefa a ser adicionada.
+  const [task, setTask] = useState({
+    id:'',
+    task:''
+  }); // Estado para a nova tarefa a ser adicionada.
   const [tasks, setTasks] = useState([]); // Estado para a lista de tarefas.
   const [editingTaskId, setEditingTaskId] = useState(null); // Estado para o id da tarefa que está sendo editada.
   const [editingTaskText, setEditingTaskText] = useState(''); // Estado para o texto da tarefa que está sendo editada.
@@ -139,25 +143,39 @@ const TodoApp = () => {
     fetchTasks();
   }, []);
 
+  const handleChange =(e)=>{
+
+    const {name, value} = e.target;
+    setTask(prevState=>({
+      ...prevState,
+      [name]:value
+    }));
+
+  }
+
   // Função que busca as tarefas da API e atualiza o estado com as tarefas recebidas.
-  const fetchTasks = async () => {
-    const response = await axios.get(API_URL); // Faz uma requisição GET para obter as tarefas.
-    setTasks(response.data); // Atualiza o estado com os dados recebidos.
+  const fetchTasks = () => {
+
+    // Obtém as tarefas armazenadas no localStorage (assumindo que estão armazenadas como uma array de objetos)
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+    // Atualiza o estado com as tarefas armazenadas
+    setTasks(storedTasks);
   };
 
   // Função que adiciona uma nova tarefa.
-  const addTask = async () => {
-    if (task) { // Verifica se o campo da tarefa não está vazio.
-      const newTask = { text: task }; // Cria um objeto de tarefa com o texto fornecido.
-      const response = await axios.post(API_URL, newTask); // Faz uma requisição POST para adicionar a nova tarefa.
-      setTasks([...tasks, response.data]); // Atualiza o estado com a nova tarefa adicionada.
-      setTask(''); // Limpa o campo de entrada.
+  const addTask = () => {
+    if (task.task) { // Verifica se o campo da tarefa não está vazio.
+      const newTask = { id:uuidv4(), task:task.task }; // Cria um objeto de tarefa com o texto fornecido.
+      localStorage.setItem(newTask.id, JSON.stringify(newTask)); // Faz uma requisição POST para adicionar a nova tarefa.
+      setTasks([...tasks, newTask]); // Atualiza o estado com a nova tarefa adicionada.
+      setTask({id:'', task:''}); // Limpa o campo de entrada.
     }
   };
 
   // Função que exclui uma tarefa.
-  const deleteTask = async (id) => {
-    await axios.delete(`${API_URL}/${id}`); // Faz uma requisição DELETE para excluir a tarefa com o id fornecido.
+  const deleteTask = (id) => {
+    localStorage.removeItem(id) // Faz uma requisição DELETE para excluir a tarefa com o id fornecido.
     setTasks(tasks.filter(task => task.id !== id)); // Atualiza o estado removendo a tarefa excluída.
   };
 
@@ -168,10 +186,10 @@ const TodoApp = () => {
   };
 
   // Função que atualiza uma tarefa existente.
-  const updateTask = async (id) => {
-    const updatedTask = { text: editingTaskText }; // Cria um objeto de tarefa com o texto atualizado.
-    await axios.put(`${API_URL}/${id}`, updatedTask); // Faz uma requisição PUT para atualizar a tarefa.
-    setTasks(tasks.map(task => (task.id === id ? { ...task, text: editingTaskText } : task))); // Atualiza o estado com a tarefa modificada.
+  const updateTask = (id) => {
+    const updatedTask = {id:id, task: editingTaskText }; // Cria um objeto de tarefa com o texto atualizado.
+    localStorage.setItem(id, JSON.stringify(updatedTask)); // Faz uma requisição PUT para atualizar a tarefa.
+    setTasks(tasks.map(task => (task.id === id ? updatedTask : task))); // Atualiza o estado com a tarefa modificada.
     setEditingTaskId(null); // Limpa o id da tarefa em edição.
     setEditingTaskText(''); // Limpa o texto da tarefa em edição.
   };
@@ -182,13 +200,15 @@ const TodoApp = () => {
       <Title>Todo App</Title> {/* Exibe o título do aplicativo de tarefas */}
       <Input
         type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
+        name="task"
+        value={task.task}
+        onChange={handleChange}
         placeholder="Add a new task"
       />
       <Button onClick={addTask}>Add Task</Button>
       <TaskList>
         {tasks.map((task) => (
+          task && task.id ? (
           <TaskItem key={task.id}>
             {editingTaskId === task.id ? (
               <EditInput
@@ -199,14 +219,15 @@ const TodoApp = () => {
               />
             ) : (
               <>
-                {task.text}
+                {task.task}
                 <div>
-                  <button onClick={() => editTask(task.id, task.text)}>Edit</button>
+                  <button onClick={() => editTask(task.id, task.task)}>Edit</button>
                   <button onClick={() => deleteTask(task.id)}>Delete</button>
                 </div>
               </>
             )}
           </TaskItem>
+          ):null
         ))}
       </TaskList>
     </Container>
