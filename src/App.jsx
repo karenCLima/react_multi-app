@@ -23,7 +23,7 @@ import {
 import QRCodeGenerator from "./pages/QRCodeGenarator";
 import IPAddressFinder from "./pages/IPAddressFinder";
 import MovieSearchEngine from "./pages/MovieSearchEngine";
-import TodoApp from "./components/TodoApp";
+import TodoApp from "./pages/TodoApp";
 import QuizApp from "./pages/QuizApp";
 import LanguageTranslator from "./pages/LanguageTranslator";
 import Login from "./components/Login";
