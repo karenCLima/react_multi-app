@@ -41,7 +41,7 @@ const Routes = ()=>{
             children:[
                 {
                     path:'/',
-                    element:<App/>
+                    element:<Home/>
                 },
                 {
                     path:'/ipAddress',
