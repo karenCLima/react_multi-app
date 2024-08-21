@@ -20,13 +20,14 @@ import {
   FaBars,
   FaArrowLeft,
 } from "react-icons/fa";
+import { useAuth } from '../context/AuthProvider';
 import QRCodeGenerator from "./QRCodeGenarator";
 import IPAddressFinder from "./IPAddressFinder";
 import MovieSearchEngine from "./MovieSearchEngine";
 import TodoApp from "./TodoApp";
 import QuizApp from "./QuizApp";
 import LanguageTranslator from "./LanguageTranslator";
-import Login from "./components/Login";
+import Login from "./Login";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -206,29 +207,24 @@ const CustomCarousel = styled(Carousel)`
 // Define o componente principal do aplicativo.
 const Home = () => {
   // Cria estados para autenticação, visibilidade da barra de navegação, componente atual, e índice do carrossel.
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);
   const [currentComponent, setCurrentComponent] = useState(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const navigate = useNavigate(); // Hook para navegação.
+  const { token, handleChangeToken } = useAuth();
 
   // Efeito colateral que redireciona para a página de login se não estiver autenticado.
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/");
+    if (!token) {
+      navigate("/login");
     }
-  }, [isAuthenticated, navigate]);
+  }, [token, navigate]);
 
-  // Função para simular login e redirecionar para o gerador de QR code.
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-    navigate("/qrcode-generator");
-  };
 
   // Função para simular logout e redirecionar para a página de login.
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    navigate("/");
+    handleChangeToken(null);
+    navigate("/login", {replace:true});
   };
 
   // Alterna a visibilidade da barra de navegação.

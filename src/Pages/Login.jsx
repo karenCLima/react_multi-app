@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useState } from 'react'; // Importa o hook useState do React
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import { useAuth } from '../context/AuthProvider';
 
 // Define o estilo do container principal do login
 const LoginContainer = styled.div`
@@ -47,17 +49,32 @@ const Button = styled.button`
 
 // Componente principal de Login
 // eslint-disable-next-line react/prop-types
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [username, setUsername] = useState(''); // Define o estado para o nome de usuário
   const [password, setPassword] = useState(''); // Define o estado para a senha
+  const { handleChangeToken } = useAuth()
 
   // Função para lidar com o envio do formulário
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Previne o comportamento padrão do formulário
-    if (username === 'admin' && password === 'password') {
-      onLogin(); // Chama a função onLogin passada como prop se as credenciais estiverem corretas
-    } else {
-      alert('Invalid credentials'); // Exibe um alerta se as credenciais estiverem incorretas
+    // if (username === 'admin' && password === 'password') {
+    //   onLogin(); // Chama a função onLogin passada como prop se as credenciais estiverem corretas
+    // } else {
+    //   alert('Invalid credentials'); // Exibe um alerta se as credenciais estiverem incorretas
+    // }
+
+    try{
+      const response = await axios.post('https://reqres.in/api/login',{
+        email: username,
+        password
+      });
+
+      const { token } = response.data;
+
+      handleChangeToken(token);
+    }catch(error){
+      console.error('Error in login: ', error);
+      alert('Credentials are not valid');
     }
   };
 
@@ -69,7 +86,7 @@ const Login = ({ onLogin }) => {
           type="text"
           value={username} // Valor do campo de entrada é ligado ao estado username
           onChange={(e) => setUsername(e.target.value)} // Atualiza o estado username conforme o usuário digita
-          placeholder="Username" // Placeholder do campo de entrada
+          placeholder="Email" // Placeholder do campo de entrada
         />
         <Input
           type="password"

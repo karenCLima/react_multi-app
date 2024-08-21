@@ -8,14 +8,15 @@ import MovieSearchEngine from "../pages/MovieSearchEngine";
 import QRCodeGenerator from "../pages/QRCodeGenarator";
 import QuizApp from "../pages/QuizApp";
 import TodoApp from "../pages/TodoApp";
+import SignUp from "../pages/SignUp";
 
 const Routes = ()=>{
     const { token } = useAuth();
 
     const routesForPublic = [
         {
-            path:'/cadastro',
-            element: <div>Cadastro Page</div>
+            path:'/signup',
+            element: <SignUp/>
         },
         {
             path:'/login',
@@ -25,8 +26,8 @@ const Routes = ()=>{
 
     const routesForNotAuthenticatedOnly = [
         {
-            path:'/cadastro',
-            element: <div>Cadastro Page</div>
+            path:'/signup',
+            element: <SignUp/>
         },
         {
             path:'/login',
