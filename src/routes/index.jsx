@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
-import { ProtectedRoute } from "./ProtectedRoute";
+import ProtectedRoute  from "./ProtectedRoute";
 import App from "../App";
 import IPAddressFinder from "../pages/IPAddressFinder";
 import LanguageTranslator from "../pages/LanguageTranslator";
@@ -9,6 +9,8 @@ import QRCodeGenerator from "../pages/QRCodeGenarator";
 import QuizApp from "../pages/QuizApp";
 import TodoApp from "../pages/TodoApp";
 import SignUp from "../pages/SignUp";
+import Login from '../pages/Login'
+import Home from '../pages/Home'
 
 const Routes = ()=>{
     const { token } = useAuth();
@@ -41,7 +43,7 @@ const Routes = ()=>{
             element:<ProtectedRoute/>,
             children:[
                 {
-                    path:'/',
+                    path:'/home',
                     element:<Home/>
                 },
                 {
@@ -75,11 +77,11 @@ const Routes = ()=>{
 
     const router = createBrowserRouter([
         ...routesForPublic,
-        ...(!token ? routesForNotAuthenticatedOnly:[]),
+        ...(!token ? routesForPublic : []),
         ...routesForAuthenticatedOnly,
     ]);
 
-    return <RouterProvider router={router} />
+    return <RouterProvider router={router} />;
     
 };
 

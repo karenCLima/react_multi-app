@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react'; // Importa o hook useState do React
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import { useAuth } from '../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 // Define o estilo do container principal do login
 const LoginContainer = styled.div`
@@ -52,29 +53,44 @@ const Button = styled.button`
 const Login = () => {
   const [username, setUsername] = useState(''); // Define o estado para o nome de usuário
   const [password, setPassword] = useState(''); // Define o estado para a senha
-  const { handleChangeToken } = useAuth()
+  const { handleChangeToken } = useAuth();
+  const navigate = useNavigate();
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault(); // Previne o comportamento padrão do formulário
-    // if (username === 'admin' && password === 'password') {
-    //   onLogin(); // Chama a função onLogin passada como prop se as credenciais estiverem corretas
-    // } else {
-    //   alert('Invalid credentials'); // Exibe um alerta se as credenciais estiverem incorretas
-    // }
 
-    try{
-      const response = await axios.post('https://reqres.in/api/login',{
-        email: username,
-        password
-      });
+    // Busca os usuários do localStorage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
 
-      const { token } = response.data;
+    // Verifica se existe algum usuário com o username e password fornecidos
+    const userFound = users.find(user => user.username === username && user.password === password);
 
-      handleChangeToken(token);
-    }catch(error){
-      console.error('Error in login: ', error);
-      alert('Credentials are not valid');
+    if (userFound) {
+      try {
+        // Faz a requisição de login para obter o token JWT
+
+        const response = await axios.post('https://dev-zaq1o35n26l6tb17.us.auth0.com/oauth/token', {
+          client_id: 'TAg5HLCct9vvfizjl447wXPMV3FRBAoN',
+          client_secret: 'cDzLMc1GkSAb0LPIopNwAOehNKYKe11K3x3S7QUTXWwpKHM5N0PmeUX503bBT54t',
+          audience: 'https://dev-zaq1o35n26l6tb17.us.auth0.com/api/v2/',
+          grant_type: 'client_credentials'
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        const response_token  = response.data.access_token;
+
+        // Armazena o token no contexto de autenticação
+        handleChangeToken(response_token );
+        // Aqui você pode redirecionar o usuário para outra página ou fazer algo mais
+        navigate('/home')
+      } catch (error) {
+        console.error('Error in login: ', error);
+        alert('Erro ao tentar realizar o login.');
+      }
+    } else {
+      alert('Usuário ou senha inválidos.');
     }
   };
 

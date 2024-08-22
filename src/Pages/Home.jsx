@@ -28,7 +28,7 @@ import TodoApp from "./TodoApp";
 import QuizApp from "./QuizApp";
 import LanguageTranslator from "./LanguageTranslator";
 import Login from "./Login";
-import "./App.css";
+import "../App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // Estiliza o contêiner principal do aplicativo.
@@ -215,6 +215,7 @@ const Home = () => {
 
   // Efeito colateral que redireciona para a página de login se não estiver autenticado.
   useEffect(() => {
+    console.log(`Home:${token}`)
     if (!token) {
       navigate("/login");
     }
@@ -269,9 +270,9 @@ const Home = () => {
       <NavBarToggle onClick={toggleNavBar}>
         <FaBars size={24} color="#2C3E50" />
       </NavBarToggle>
-      {!isAuthenticated ? (
+      {!token ? (
         <MainContent>
-          <Login onLogin={handleLogin} />
+          <Login onLogin={handleChangeToken} />
         </MainContent>
       ) : (
         <>

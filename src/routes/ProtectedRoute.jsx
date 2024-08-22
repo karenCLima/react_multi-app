@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
-export const ProtectedRoute = ()=>{
+const ProtectedRoute = ()=>{
     const { token } = useAuth();
 
     //Checa se o usário está autenticado
@@ -13,3 +13,5 @@ export const ProtectedRoute = ()=>{
     //Se está autenticado, renderiza as rotas filhas
     return <Outlet/>
 }
+
+export default ProtectedRoute
