@@ -57,7 +57,7 @@ const CarouselContainer = styled.div`
 const Footer = styled.div`
   width: 100%;
   background-color: var(--quaternary-color);
-  color: grey;
+  color: white;
   text-align: center;
   padding: 10px 0;
   position: absolute;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // Cria um componente estilizado chamado Question usando styled-components.
 // Esse componente estiliza um <p> para exibir a pergunta com cor, tamanho da fonte e margem.
 const Question = styled.p`
-  color: #555; // Define a cor do texto como um tom médio de cinza.
+  color: black; // Define a cor do texto como um tom médio de cinza.
   font-size: 20px; // Define o tamanho da fonte como 20px.
   margin-bottom: 20px; // Adiciona uma margem de 20px abaixo da pergunta.
   text-align: center; // Alinha o texto no centro horizontalmente.
@@ -14,7 +14,7 @@ const Question = styled.p`
 const OptionButton = styled.button`
   padding: 12px 20px; // Adiciona padding de 12px verticalmente e 20px horizontalmente.
   background-color: var(--secondary-color); // Define a cor de fundo como azul.
-  color: grey; // Define a cor do texto como branco.
+  color: white; // Define a cor do texto como branco.
   border: none; // Remove a borda padrão do botão.
   border-radius: 5px; // Adiciona bordas arredondadas de 5px.
   cursor: pointer; // Define o cursor como uma mão ao passar sobre o botão.

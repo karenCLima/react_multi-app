@@ -22,13 +22,13 @@ const CarouselItemStyled = styled.div`
   h2 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: grey;
+    color: black;
   }
 
   button {
     padding: 10px 20px;
     background-color: var(--quaternary-color);
-    color: grey;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;

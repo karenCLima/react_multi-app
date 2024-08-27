@@ -18,7 +18,7 @@ const Container = styled.div`
 
 // Define o estilo do título
 const Title = styled.h2`
-  color: grey;
+  color: black;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -45,7 +45,7 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 12px 20px;
   background-color: var(--secondary-color);
-  color: grey;
+  color: white;
   border: none;
   border-radius: 20px;
   cursor: pointer;

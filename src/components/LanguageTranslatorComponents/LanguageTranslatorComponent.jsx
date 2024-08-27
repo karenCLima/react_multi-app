@@ -1,7 +1,6 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
-import Select from 'react-select'; //Importa o react-select para estilizar o Select
 import SelectLanguage from './SelectLanguage';
 
 // Define o estilo do container principal
@@ -20,7 +19,7 @@ const Container = styled.div`
 
 // Define o estilo do título
 const Title = styled.h2`
-  color: grey;
+  color: black;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -28,7 +27,7 @@ const Title = styled.h2`
 
 // Define o estilo do label
 const Label = styled.label`
-  color: #555;
+  color: black;
   font-size: 16px;
   margin-right: 10px;
 `;
@@ -67,7 +66,7 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 12px 20px;
   background-color: var(--secondary-color);
-  color: grey;
+  color: white;
   border: none;
   border-radius: 20px;
   cursor: pointer;

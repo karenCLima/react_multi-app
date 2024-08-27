@@ -7,7 +7,7 @@ import { getTasks, addTask, deleteTask, updateTask } from '../../service/TaskSer
 // Cria um componente estilizado chamado Title usando styled-components.
 // Esse componente estiliza um <h2> com cor, margem, tamanho da fonte e alinhamento.
 const Title = styled.h2`
-  color: grey; // Define a cor do texto como um tom escuro de cinza.
+  color: black; // Define a cor do texto como um tom escuro de cinza.
   margin-bottom: 20px; // Adiciona uma margem de 20px abaixo do título.
   font-size: 24px; // Define o tamanho da fonte como 24px.
   text-align: center; // Alinha o texto no centro horizontalmente.
@@ -19,7 +19,7 @@ const Input = styled.input`
   margin-bottom: 20px; // Adiciona uma margem de 20px abaixo do input.
   padding: 12px; // Adiciona padding de 12px dentro do input.
   border: 1px solid var(--terciary-color); // Define uma borda de 1px sólida e cinza clara.
-  border-radius: 5px; // Adiciona bordas arredondadas de 5px.
+  border-radius: 20px; // Adiciona bordas arredondadas de 5px.
   width: 100%; // Define a largura como 100% do contêiner pai.
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); // Adiciona uma sombra interna sutil.
   font-size: 16px; // Define o tamanho da fonte como 16px.
@@ -36,9 +36,9 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 12px 20px; // Adiciona padding de 12px verticalmente e 20px horizontalmente.
   background-color: var(--secondary-color); // Define a cor de fundo como azul.
-  color: grey; // Define a cor do texto como branco.
+  color: white; // Define a cor do texto como branco.
   border: none; // Remove a borda padrão do botão.
-  border-radius: 5px; // Adiciona bordas arredondadas de 5px.
+  border-radius: 20px; // Adiciona bordas arredondadas de 5px.
   cursor: pointer; // Define o cursor como uma mão ao passar sobre o botão.
   font-size: 16px; // Define o tamanho da fonte como 16px.
   transition: background-color 0.3s; // Adiciona uma transição suave para a cor de fundo.
@@ -61,7 +61,7 @@ const TaskList = styled.ul`
 // Esse componente estiliza um <li> com fundo, bordas arredondadas, padding, margem, sombra e efeitos de transição.
 const TaskItem = styled.li`
   background: var(--secondary-color); // Define o fundo como um tom muito claro de cinza.
-  border-radius: 5px; // Adiciona bordas arredondadas de 5px.
+  border-radius: 20px; // Adiciona bordas arredondadas de 5px.
   padding: 10px; // Adiciona padding de 10px dentro do item.
   margin-bottom: 10px; // Adiciona uma margem de 10px abaixo do item.
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Adiciona uma sombra sutil ao redor do item.
