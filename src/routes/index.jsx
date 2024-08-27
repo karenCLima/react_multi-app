@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import ProtectedRoute  from "./ProtectedRoute";
 import App from "../App";
@@ -15,70 +15,62 @@ import Home from '../pages/Home'
 const Routes = ()=>{
     const { token } = useAuth();
 
-    const routesForPublic = [
+    const router = createBrowserRouter([
+        // Rota pública para SignUp
         {
-            path:'/signup',
+            path: '/signup',
             element: <SignUp/>
         },
+        // Rota pública para Login
         {
-            path:'/login',
+            path: '/login',
             element: <Login/>
-        }
-    ];
-
-    const routesForNotAuthenticatedOnly = [
-        {
-            path:'/signup',
-            element: <SignUp/>
         },
-        {
-            path:'/login',
-            element: <Login/>
-        }
-    ];
-
-    const routesForAuthenticatedOnly = [
+        // Rota raiz redireciona dependendo da autenticação
         {
             path: '/',
-            element:<ProtectedRoute/>,
-            children:[
+            element: token ? <Navigate to="/home" /> : <Navigate to="/login" />
+        },
+        // Rotas protegidas
+        {
+            path: '/',
+            element: <ProtectedRoute />,
+            children: [
                 {
-                    path:'/home',
-                    element:<Home/>
+                    path: '/home',
+                    element: <Home/>
                 },
                 {
-                    path:'/ipAddress',
-                    element:<IPAddressFinder/>
+                    path: '/ipAddress',
+                    element: <IPAddressFinder/>
                 },
                 {
-                    path:'/translator',
-                    element:<LanguageTranslator/>
+                    path: '/translator',
+                    element: <LanguageTranslator/>
                 },
                 {
-                    path:'/movie',
-                    element:<MovieSearchEngine/>
+                    path: '/movie',
+                    element: <MovieSearchEngine/>
                 },
                 {
-                    path:'/qrcode',
-                    element:<QRCodeGenerator/>
+                    path: '/qrcode',
+                    element: <QRCodeGenerator/>
                 },
                 {
-                    path:'/quiz',
-                    element:<QuizApp/>
+                    path: '/quiz',
+                    element: <QuizApp/>
                 },
                 {
-                    path:'/todo',
-                    element:<TodoApp/>
+                    path: '/todo',
+                    element: <TodoApp/>
                 }
-                
             ]
+        },
+        // Fallback para rotas inválidas
+        {
+            path: '*',
+            element: <Navigate to={token ? "/home" : "/login"} replace />
         }
-    ]
-
-    const router = createBrowserRouter([
-        ...routesForPublic,
-        ...(!token ? routesForPublic : []),
-        ...routesForAuthenticatedOnly,
     ]);
 
     return <RouterProvider router={router} />;

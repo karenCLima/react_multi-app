@@ -1,5 +1,6 @@
 import AuthProvider from './context/AuthProvider'
 import Routes from './routes'
+import AccessProvider from './context/AccessContext';
 
 // Define o componente principal do aplicativo.
 const App = () => {
@@ -7,7 +8,10 @@ const App = () => {
   // Renderiza o componente principal.
   return (
     <AuthProvider>
-      <Routes/>
+      <AccessProvider>
+        <Routes/>
+      </AccessProvider>
+  
     </AuthProvider>
   )
 };
