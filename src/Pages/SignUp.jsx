@@ -1,42 +1,54 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import image from '../imagens/imagem_login.png'
 
 const SignUpContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap:14%;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: var(--primary-color);
+`;
+
+//Define o estilo do cointainer da imagem 
+const Image = styled.div`
+  width:60%;
+  img{
+    width:100%;
+    height: 80%;
+  }
 `;
 
 const SignUpForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  align-items: center;
+  background: var(--terciary-color);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const Input = styled.input`
-  padding: 10px;
   margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  width: 200px;
 `;
 
 const Button = styled.button`
-  padding: 10px;
-  background-color: #4caf50;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
 
   &:hover {
-    background-color: #45a049;
+    background-color: var(--primary-color);
+    color:grey;
   }
 `;
 
@@ -47,7 +59,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newUser = { username, email, password };
+    const newUser = { username, email, password }; //Cria um novo usuário
 
     // Salva os dados do usuário em localStorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -55,6 +67,7 @@ const SignUp = () => {
     localStorage.setItem('users', JSON.stringify(users));
 
     alert('Usuário cadastrado com sucesso!');
+    //limpa os inputs
     setUsername('');
     setEmail('');
     setPassword('');
@@ -62,6 +75,9 @@ const SignUp = () => {
 
   return (
     <SignUpContainer>
+      <Image>
+      <img src={image} alt="Imagem do Signup da ijmaki pixabay" />
+      </Image>
       <SignUpForm onSubmit={handleSubmit}>
         <h2>Cadastrar</h2>
         <Input
