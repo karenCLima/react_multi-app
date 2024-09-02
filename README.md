@@ -58,7 +58,7 @@ Qualidade de Código e Melhores Práticas:
 1. **Clone o repositório**: Use o comando `git clone` para clonar o repositório para o seu computador. Por exemplo:
 
 ```bash
-   git clone https://github.com/karenCLima/react-multi-app.git
+   git clone https://github.com/karenCLima/react_multi-app.git
 ``` 
 
 2. ***Instale as dependências***: Entre no diretório do projeto clonado e instale as dependências do Node.js usando npm (Node Package Manager). Use o comando:
