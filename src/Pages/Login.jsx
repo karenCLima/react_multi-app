@@ -3,7 +3,7 @@ import { useState } from 'react'; // Importa o hook useState do React
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import { useAuth } from '../context/AuthProvider';
 import { useNavigate, Link } from 'react-router-dom';
-import imagem_login from '../imagens/imagem_login.png'
+import imagem_login from '../imagens/imagem_login.png' //importa a imagem
 
 // Define o estilo do container principal do login
 const LoginContainer = styled.div`
@@ -19,7 +19,7 @@ const LoginContainer = styled.div`
 const LoginImage = styled.div`
   width:60%;
   img{
-    width:100%;
+    width:90%;
     height: 80%;
   }
 `;
@@ -68,6 +68,7 @@ const Button = styled.button`
 
   &:hover {
     background-color: var(--primary-color);
+    color:grey;
   }
 `;
 
@@ -76,8 +77,8 @@ const Button = styled.button`
 const Login = () => {
   const [username, setUsername] = useState(''); // Define o estado para o nome de usuário
   const [password, setPassword] = useState(''); // Define o estado para a senha
-  const { handleChangeToken } = useAuth();
-  const navigate = useNavigate();
+  const { handleChangeToken } = useAuth(); //chama o handleChangeToken do Context AuthProvider
+  const navigate = useNavigate(); //Para navegar para página home se conseguir fazer o login
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (e) => {
@@ -93,8 +94,9 @@ const Login = () => {
       try {
         // Faz a requisição de login para obter o token JWT
 
+        //Usei uma API da Auth0
         const response = await axios.post('https://dev-zaq1o35n26l6tb17.us.auth0.com/oauth/token', {
-          client_id: `${import.meta.env.VITE_CLIENT_ID_AUTH}`,
+          client_id: `${import.meta.env.VITE_CLIENT_ID_AUTH}`, //importa variaveis de ambiente
           client_secret: `${import.meta.env.VITE_CLIENT_SECRET_AUTH}`,
           audience: 'https://dev-zaq1o35n26l6tb17.us.auth0.com/api/v2/',
           grant_type: 'client_credentials'
@@ -120,7 +122,7 @@ const Login = () => {
   return (
     <LoginContainer>
       <LoginImage>
-        <img src={imagem_login} alt="Imagem do login da ijmaki pixabay" />
+        <img src={imagem_login} alt="Imagem do login da ijmaki pixabay" /> 
       </LoginImage>
 
       <LoginForm onSubmit={handleSubmit}>
