@@ -48,7 +48,7 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 10px 20px;
   background-color: var(--secondary-color);
-  color: grey;
+  color: white;
   border: none;
   border-radius: 15px;
   cursor: pointer;
