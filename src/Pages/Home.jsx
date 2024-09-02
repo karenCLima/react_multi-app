@@ -37,6 +37,7 @@ const MainContent = styled.div`
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
+  z-index:1;
 `;
 
 // Estiliza o contêiner do carrossel.
