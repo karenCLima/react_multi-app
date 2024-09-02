@@ -81,8 +81,8 @@ const Login = () => {
         // Faz a requisição de login para obter o token JWT
 
         const response = await axios.post('https://dev-zaq1o35n26l6tb17.us.auth0.com/oauth/token', {
-          client_id: 'TAg5HLCct9vvfizjl447wXPMV3FRBAoN',
-          client_secret: 'cDzLMc1GkSAb0LPIopNwAOehNKYKe11K3x3S7QUTXWwpKHM5N0PmeUX503bBT54t',
+          client_id: `${import.meta.env.VITE_CLIENT_ID_AUTH}`,
+          client_secret: `${import.meta.env.VITE_CLIENT_SECRET_AUTH}`,
           audience: 'https://dev-zaq1o35n26l6tb17.us.auth0.com/api/v2/',
           grant_type: 'client_credentials'
         }, {

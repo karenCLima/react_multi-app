@@ -84,7 +84,7 @@ const IPAddressFinderComponent = ()=>{
 
       if(Object.keys(validationErros).length === 0){
         try {
-          const url = `https://ipinfo.io/${ip}/json?token=c602a2092299ee`
+          const url = `https://ipinfo.io/${ip}/json?token=${import.meta.env.VITE_IPINFO_API_TOKEN}`
           const response = await axios.get(url); // Faz uma requisição GET para a API ipinfo.io
           setIpData(response.data); // Armazena os dados da resposta no estado ipData
         } catch (error) {
