@@ -30,7 +30,7 @@ Qualidade de Código e Melhores Práticas:
 
 - Desempenho e Escalabilidade
 
-## Funcionalidade
+## Funcionalidades
 
 - Cadastro: página de cadastro de usuário.
 - Login: página de login de usuário.
@@ -69,10 +69,11 @@ npm install
 Isso instalará todas as dependências listadas no arquivo package.json.
 
 3. ***Crie um arquivo .env***: Para as aplicações funcionarem crie um arquivo na raiz do projeto com variáveis de ambiente preenchendo com os seguintes elementos:
-
-VITE_IPINFO_API_TOKEN=<YOUR_IPINFO_API_TOKEN>
-VITE_CLIENT_ID_AUTH=<YOUR_CLIENT_ID_AUTH0>
+```
+VITE_IPINFO_API_TOKEN=<YOUR_IPINFO_API_TOKEN>  
+VITE_CLIENT_ID_AUTH=<YOUR_CLIENT_ID_AUTH0>  
 VITE_CLIENT_SECRET_AUTH=<YOUR_CLIENT_SECRET_AUTH_0>
+``` 
 
 4. ***Rode o projeto***: Execute os seguintes comandos:
 ```bash
