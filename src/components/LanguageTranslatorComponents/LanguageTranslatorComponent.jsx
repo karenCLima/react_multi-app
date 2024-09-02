@@ -2,6 +2,7 @@ import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import SelectLanguage from './SelectLanguage';
+import { useAuth } from '../../context/AuthProvider'
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -15,6 +16,7 @@ const Container = styled.div`
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   max-width: 900px;
   margin: 0 auto;
+  z-index:1;
 `;
 
 // Define o estilo do título
@@ -134,11 +136,16 @@ const LanguageTranslatorComponent = ()=>{
     const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
     const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
     const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
+    const { token } = useAuth();
 
   // Função para traduzir o texto
   const translateText = async () => {
     try {
-      const response = await axios.get('https://api.mymemory.translated.net/get', {
+      const response = await axios.get('/api/get', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json'
+        },
         params: {
           q: text, // Texto a ser traduzido
           langpair: `${sourceLang}|${targetLang}`, // Par de línguas para tradução
