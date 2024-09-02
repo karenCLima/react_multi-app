@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react'; // Importa o hook useState do React
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import { useAuth } from '../context/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import imagem_login from '../imagens/imagem_login.png'
 
 // Define o estilo do container principal do login
@@ -43,6 +43,19 @@ const Input = styled.input`
   border-radius: 15px;
   width: 200px;
 `;
+
+//Define o estilo do paragrafo de aviso
+const Message = styled.p`
+  color:white;
+`
+
+
+//Define o estilo do span
+const Span = styled.span`
+  color:var(--quaternary-color);
+  cursor:pointer;
+  text-decoration:none;
+`
 
 // Define o estilo do botão
 const Button = styled.button`
@@ -124,6 +137,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)} // Atualiza o estado password conforme o usuário digita
           placeholder="Password" // Placeholder do campo de entrada
         />
+        <Message>Não tem conta? Então cadastre-se <Link to="/signup" style={{textDecoration:'none'}}><Span>aqui</Span></Link>.</Message>
         <Button type="submit">Login</Button> {/* Botão que envia o formulário */}
       </LoginForm>
     </LoginContainer>
