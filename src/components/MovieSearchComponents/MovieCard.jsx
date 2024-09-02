@@ -26,12 +26,12 @@ const MovieCardStyled = styled.div`
   h3 {
     font-size: 18px;
     margin: 10px 0;
-    color:grey;
+    color:black;
   }
 
   p {
     font-size: 14px;
-    color: #555;
+    color: black;
   }
 `;
 

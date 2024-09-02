@@ -34,7 +34,7 @@ const NavBar = styled.div`
 
 // Estiliza os links na barra de navegação.
 const StyledLink = styled(Link)`
-  color: grey;
+  color: white;
   text-decoration: none;
   padding: 12px;
   display: flex;
@@ -82,8 +82,8 @@ const NavBarComponent = ({isOpen, onClickHandle}) => {
                 onClick={onClickHandle}
                 style={{
                     marginTop: "20px",
-                    color: "grey",
-                    backgroundColor: "#FAEDCE",
+                    color: "black",
+                    backgroundColor: "#F7EFE5",
                     border: "none",
                     borderRadius: "20px",
                     boxShadow: "15px rgba(0,0,0,0.3)"
