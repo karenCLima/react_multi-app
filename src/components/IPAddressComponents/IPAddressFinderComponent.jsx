@@ -2,6 +2,7 @@ import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import IPAddressData from './IPAddressData';
+import { useAuth } from '../../context/AuthProvider'
 
 // Define o estilo do título
 const Title = styled.h2`
@@ -55,6 +56,7 @@ const IPAddressFinderComponent = ()=>{
     const [ip, setIp] = useState(''); // Define o estado para o IP digitado pelo usuário
     const [ipData, setIpData] = useState(null); // Define o estado para armazenar os dados do IP
     const [errors, setErrors] = useState({}); // Declara um estado errors para armazenar mensagens de erro
+    const { token } = useAuth()
 
     //Função que valida se existe erro
     const validate = ()=>{
@@ -82,7 +84,7 @@ const IPAddressFinderComponent = ()=>{
 
       if(Object.keys(validationErros).length === 0){
         try {
-          const url = `https://ipinfo.io/${ip}/json`
+          const url = `https://ipinfo.io/${ip}/json?token=c602a2092299ee`
           const response = await axios.get(url); // Faz uma requisição GET para a API ipinfo.io
           setIpData(response.data); // Armazena os dados da resposta no estado ipData
         } catch (error) {
