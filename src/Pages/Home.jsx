@@ -77,9 +77,7 @@ const Home = () => {
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);
   const { handleAccess, selectedId, currentPage, changeIndex } = useAccess();
   const navigate = useNavigate(); // Hook para navegação.
-  const { token, handleChangeToken } = useAuth();
-
-  // Efeito colateral que redireciona para a página de login se não estiver autenticado.
+  const { handleChangeToken } = useAuth();
   
 
 
@@ -124,7 +122,7 @@ const Home = () => {
     
     <AppContainer>
     <NavBarToggle onClickHandle={toggleNavBar} />
-    <NavBarComponent isOpen={isNavBarOpen} onClickHandle={handleLogout} />
+    <NavBarComponent isopen={isNavBarOpen} onClickHandle={handleLogout} />
     <MainContent>
       {currentPage ? (
         <>

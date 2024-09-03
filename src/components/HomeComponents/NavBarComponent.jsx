@@ -28,7 +28,7 @@ const NavBar = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+    display: ${({ $isopen }) => ($isopen ? "flex" : "none")};
   }
 `;
 
@@ -48,12 +48,12 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const NavBarComponent = ({isOpen, onClickHandle}) => {
+const NavBarComponent = ({isopen, onClickHandle}) => {
 
     const { handleAccess } = useAccess();
 
     return (
-        <NavBar isOpen={isOpen}>
+        <NavBar $isopen={isopen}>
             <StyledLink onClick={() => handleAccess(0, "QRCodeGenerator")}>
                 <FaQrcode />
                 QR Code Generator

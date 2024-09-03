@@ -46,6 +46,7 @@ Qualidade de Código e Melhores Práticas:
 - Vite
 - axios
 - qrcoe.react
+- react router dom
 - react icons
 - react select
 - styled-components
@@ -63,7 +64,7 @@ Qualidade de Código e Melhores Práticas:
 
 2. ***Instale as dependências***: Entre no diretório do projeto clonado e instale as dependências do Node.js usando npm (Node Package Manager). Use o comando:
 ```bash
-cd react-multi-app
+cd react_multi-app
 npm install
 ```
 Isso instalará todas as dependências listadas no arquivo package.json.

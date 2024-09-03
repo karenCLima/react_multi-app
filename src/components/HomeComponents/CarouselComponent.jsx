@@ -20,6 +20,7 @@ const CarouselComponent = ({selectedItem, onChange}) => {
         <>
             <CustomCarousel
                 showArrows={true}
+                showThumbs={false}
                 infiniteLoop={true}
                 autoPlay={true}
                 interval={5000}
